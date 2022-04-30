@@ -4,15 +4,18 @@ module.exports = {
     es2021: true
   },
   extends: [
-    'plugin:vue/essential',
+    'plugin:react/recommended',
     'standard'
   ],
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
   plugins: [
-    'vue'
+    'react'
   ],
   rules: {
   }
