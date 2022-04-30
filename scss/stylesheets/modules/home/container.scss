@@ -1,0 +1,79 @@
+@mixin aColor($aColor) {
+  color: $aColor;
+}
+
+@mixin centerFlex ($flexDirection, $justifyContent) {
+  display: flex;
+  flex-direction: $flexDirection;
+  flex-wrap: nowrap;
+  justify-content: $justifyContent;
+  align-items: center;
+}
+
+.title {
+  margin: auto;
+  margin-top: 30px;
+  text-align: center;
+  color: black;
+  font-size: 24px;
+}
+
+.container {
+  margin-top: 100px;
+
+  .user {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+
+    a {
+      font-size: 20px;
+      margin-bottom: 50px;
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      text-decoration: none;
+      color: black;
+      border-radius: 99em;
+      background-color: rgb(0, 255, 247);
+
+      &:hover {
+        color: rgb(0, 156, 253);
+        background-color: rgba($color: #fd9dfe, $alpha: 1);
+      }
+    }
+  }
+}
+
+
+
+/**************************************
+BREAKPOINTS
+**************************************/
+@media screen and (min-width: 600px) {
+  .title {
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    color: white;
+    font-size: 36px;
+  }
+
+  .container {
+    margin-top: 100px;
+
+    .user {
+      flex-direction: row;
+
+      a {
+        font-size: 20px;
+        margin-right: 60px;
+        margin-left: 60px;
+      }
+    }
+  }
+}

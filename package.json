@@ -20,7 +20,8 @@
   "homepage": "https://github.com/eruc1117/mercenary_setting#readme",
   "dependencies": {
     "express": "^4.18.0",
-    "express-handlebars": "^6.0.5"
+    "express-handlebars": "^6.0.5",
+    "node-sass-middleware": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "^8.14.0",

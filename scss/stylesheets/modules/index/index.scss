@@ -1,0 +1,49 @@
+@mixin flex-display ($direction) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+@mixin border ($color) {
+  border: 2px;
+  border-width: 2px;
+  border-color: $color;
+  border-style: solid;
+}
+
+.content-web {
+  display: none;
+}
+
+.content-mobile {
+  z-index: 100;
+  position: fixed;
+  bottom: 50px;
+  right: 0px;
+}
+
+#list-button {
+  height: 30px;
+  line-height: 30px;
+}
+
+@media screen and (min-width: 600px) {
+  .content-mobile {
+    display: none;
+  }
+
+  .content-web {
+    margin-top: 10%;
+    height: 100%;
+    display: block;
+
+    li {
+      list-style-type: none;
+      text-align: center;
+      margin-bottom: 5%;
+    }
+  }
+}
