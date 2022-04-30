@@ -1,0 +1,33 @@
+{
+  "name": "mercenary_setting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eruc1117/mercenary_setting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eruc1117/mercenary_setting/issues"
+  },
+  "homepage": "https://github.com/eruc1117/mercenary_setting#readme",
+  "dependencies": {
+    "express": "^4.18.0",
+    "express-handlebars": "^6.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^8.7.1"
+  }
+}
