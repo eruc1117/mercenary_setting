@@ -135,6 +135,11 @@ const mercenaryController = {
         range,
         image
       } = req.body
+      const repeatCheck = await Mercenary.findOne({ where: { name } })
+      if (repeatCheck) {
+        req.flash('error_messages', '傭兵已存在！')
+        return res.redirect('back')
+      }
       const emptyCheck = (element) => element === ''
       if (Object.values(req.body).some(emptyCheck)) throw new Error('不能輸入空值！')
       await Mercenary.create({

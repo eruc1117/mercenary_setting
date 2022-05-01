@@ -120,6 +120,66 @@ const bossController = {
     } catch (err) {
       next(err)
     }
+  },
+  createBoss: async (req, res, next) => {
+    try {
+      const property = await Property.findAll({
+        raw: true
+      })
+      const skin = await Skin.findAll({
+        raw: true
+      })
+      if (!property || !skin) throw new Error('資料庫出錯！')
+      res.render('admin/bossCreate', {
+        property,
+        skin,
+        cssStyle: adminMercenaryEdit.css
+      })
+    } catch (err) {
+      next(err)
+    }
+  },
+  postBoss: async (req, res, next) => {
+    try {
+      const property = await Property.findAll({
+        raw: true
+      })
+      const skin = await Skin.findAll({
+        raw: true
+      })
+      if (!property || !skin) throw new Error('資料庫出錯！')
+      const {
+        name,
+        propertyId,
+        skinId,
+        attack,
+        range,
+        image
+      } = req.body
+      const boss = await Fixattribute.findOne({ where: { name } })
+      const emptyCheck = (element) => element === ''
+      if (boss) {
+        req.flash('error_messages', '王寵已存在！')
+        return res.redirect('back')
+      }
+      if (Object.values(req.body).some(emptyCheck)) throw new Error('不能輸入空值！')
+      await Fixattribute.create({
+        name,
+        propertyId,
+        skinId,
+        range,
+        image
+      })
+      const fixattribute = await Fixattribute.findOne({ where: { name }, raw: true })
+      await Boss.create({
+        fixattributeId: fixattribute.id,
+        attack
+      })
+      req.flash('success_messages', '新增王寵資料成功！')
+      res.redirect('/admin/bosses')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 
