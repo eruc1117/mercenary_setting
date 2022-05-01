@@ -1,10 +1,10 @@
-const { Mercenary, Property, Weapon } = require('../models')
-const customize = require('../helpers/constructor')
+const { Mercenary, Property, Weapon } = require('../../models')
+const customize = require('../../helpers/constructor')
 
 const adminMercenaries = new customize.PageCss('adminMercenaries')
 const adminMercenaryEdit = new customize.PageCss('adminMercenaryEdit')
 
-const adminController = {
+const mercenaryController = {
   getMercenaries: async (req, res, next) => {
     try {
       const data = await Mercenary.findAll({
@@ -155,4 +155,4 @@ const adminController = {
   }
 }
 
-module.exports = adminController
+module.exports = mercenaryController

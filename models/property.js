@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       Property.hasMany(models.Mercenary, {
         foreignKey: 'propertyId'
       })
+      Property.hasMany(models.Fixattribute, {
+        foreignKey: 'propertyId'
+      })
     }
   };
   Property.init({

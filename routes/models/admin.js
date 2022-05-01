@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const adminController = require('../../controller/adminController')
+const mercenaryController = require('../../controller/admin/mercenaryController')
+const bossController = require('../../controller/admin/bossController')
 
-router.get('/mercenary/:id/edit', adminController.editMercenary)
-router.put('/mercenary/:id/edit', adminController.putMercenary)
-router.delete('/mercenary/:id', adminController.deleteMercenary)
-router.get('/mercenary/create', adminController.createMercenary)
-router.post('/mercenary/create', adminController.postMercenary)
-router.get('/mercenary/:id', adminController.getMercenary)
-router.get('/mercenaries', adminController.getMercenaries)
+router.get('/mercenary/:id/edit', mercenaryController.editMercenary)
+router.put('/mercenary/:id/edit', mercenaryController.putMercenary)
+router.delete('/mercenary/:id', mercenaryController.deleteMercenary)
+router.get('/mercenary/create', mercenaryController.createMercenary)
+router.post('/mercenary/create', mercenaryController.postMercenary)
+router.get('/mercenary/:id', mercenaryController.getMercenary)
+router.get('/mercenaries', mercenaryController.getMercenaries)
+router.get('/bosses', bossController.getBosses)
 
 module.exports = router

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      Skin.hasMany(models.Boss, {
+      Skin.hasMany(models.Fixattribute, {
         foreignKey: 'skinId'
       })
     }

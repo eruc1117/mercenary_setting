@@ -1,24 +1,40 @@
 'use strict'
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Bosses', {
+    await queryInterface.createTable('Fixattributes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fixattribute_id: {
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      property_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Fixattributes',
+          model: 'Properties',
           key: 'id'
         }
       },
-      attack: {
+      skin_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Skins',
+          key: 'id'
+        }
+      },
+      range: {
         allowNull: false,
         type: Sequelize.INTEGER
+      },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       created_at: {
         allowNull: false,
@@ -31,6 +47,6 @@ module.exports = {
     })
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Bosses')
+    await queryInterface.dropTable('Fixattributes')
   }
 }

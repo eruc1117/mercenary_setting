@@ -10,14 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      // define association here
+      Boss.belongsTo(models.Fixattribute, { foreignKey: 'fixattributeId' })
     }
   };
   Boss.init({
-    name_id: DataTypes.INTEGER,
-    skin_id: DataTypes.INTEGER,
-    attack: DataTypes.INTEGER,
-    range: DataTypes.INTEGER
+    fixattribute_id: DataTypes.INTEGER,
+    attack: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Boss',
