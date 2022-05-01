@@ -180,6 +180,16 @@ const bossController = {
     } catch (err) {
       next(err)
     }
+  },
+  deleteBoss: async (req, res, next) => {
+    try {
+      const data = await Boss.findByPk(req.params.id)
+      if (!data) throw new Error('王寵不存在！')
+      data.destroy()
+      res.redirect('/admin/bosses')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 
