@@ -104,6 +104,54 @@ const adminController = {
     } catch (err) {
       next(err)
     }
+  },
+  createMercenary: async (req, res, next) => {
+    try {
+      const property = await Property.findAll({
+        raw: true
+      })
+      const weapon = await Weapon.findAll({
+        raw: true
+      })
+      if (!property || !weapon) throw new Error('資料庫出錯！')
+      res.render('admin/mercenaryCreate', {
+        property,
+        weapon,
+        cssStyle: adminMercenaryEdit.css
+      })
+    } catch (err) {
+      next(err)
+    }
+  },
+  postMercenary: async (req, res, next) => {
+    try {
+      const {
+        name,
+        propertyId,
+        weaponId,
+        hp,
+        attack,
+        attackSpeed,
+        range,
+        image
+      } = req.body
+      const emptyCheck = (element) => element === ''
+      if (Object.values(req.body).some(emptyCheck)) throw new Error('不能輸入空值！')
+      await Mercenary.create({
+        name,
+        propertyId,
+        weaponId,
+        hp,
+        attack,
+        attackSpeed,
+        range,
+        image
+      })
+      req.flash('success_messages', '新增傭兵資料成功！')
+      res.redirect('/admin/mercenaries')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 

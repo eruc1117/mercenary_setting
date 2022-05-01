@@ -1,14 +1,14 @@
-<h1>修改傭兵資料</h1>
+<h1>新增傭兵資料</h1>
 
 <div class="edit-container">
-  <form action="/admin/mercenary/{{ data.id }}/edit?_method=PUT" method="POST">
+  <form action="/admin/mercenary/create" method="POST">
     <div class="input-block">
       <label for="name">名稱</label>
-      <input type="text" id="name" name="name" value="{{data.name}}" required>
+      <input type="text" id="name" name="name" required>
     </div>
     <div class="input-block">
       <label for="image">圖片</label>
-      <input type="text" id="image" name="image" value="{{data.image}}" required>
+      <input type="text" id="image" name="image" required>
       <!--增加圖片預覽-->
       <img src="{{data.image}}" id="preview" alt="你打錯了">
       <button type="button" id="previewButton">預覽</button>
@@ -17,7 +17,7 @@
       <label class="form-label" for="propertyId">屬性</label>
       <select class="form-control" id="propertyId" name="propertyId">
         {{#each property}}
-        <option value="{{this.id}}" {{#ifCond this.id ../data.propertyId}} selected {{/ifCond}}>
+        <option value="{{this.id}}">
           {{this.name}}
         </option>
         {{/each}}
@@ -27,7 +27,7 @@
       <label class="form-label" for="weaponId">武器</label>
       <select class="form-control" id="weaponId" name="weaponId">
         {{#each weapon}}
-        <option value="{{this.id}}" {{#ifCond this.id ../data.weaponId}} selected {{/ifCond}}>
+        <option value="{{this.id}}">
           {{this.name}}
         </option>
         {{/each}}
@@ -35,21 +35,21 @@
     </div>
     <div class="input-block">
       <label for="hp">生命值</label>
-      <input type="number" id="hp" name="hp" value="{{data.hp}}" required>
+      <input type="number" id="hp" name="hp" required>
     </div>
     <div class="input-block">
       <label for="attack">攻擊</label>
-      <input type="number" id="attack" name="attack" value="{{data.attack}}" required>
+      <input type="number" id="attack" name="attack" required>
     </div>
     <div class="input-block">
       <label for="attackSpeed">攻速</label>
-      <input type="number" id="attackSpeed" name="attackSpeed" value="{{data.attackSpeed}}" step="0.01" required>
+      <input type="number" id="attackSpeed" name="attackSpeed" step="0.01" required>
     </div>
     <div class="input-block">
       <label for="range">攻擊範圍</label>
-      <input type="number" id="range" name="range" value="{{data.range}}" required>
+      <input type="number" id="range" name="range" required>
     </div>
-    <button type="submit" class="btn btn-primary">更新</button>
+    <button type="submit" class="btn btn-primary">新增</button>
     <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
   </form>
 </div>
