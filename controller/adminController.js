@@ -94,6 +94,16 @@ const adminController = {
     } catch (err) {
       next(err)
     }
+  },
+  deleteMercenary: async (req, res, next) => {
+    try {
+      const data = await Mercenary.findByPk(req.params.id)
+      if (!data) throw new Error('傭兵不存在！')
+      data.destroy()
+      res.redirect('/admin/mercenaries')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 
