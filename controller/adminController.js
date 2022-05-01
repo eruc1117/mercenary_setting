@@ -8,7 +8,7 @@ const adminController = {
     try {
       const data = await Mercenary.findAll({
         attributes: [
-          'name', 'propertyId', 'weaponId'
+          'id', 'name', 'propertyId', 'weaponId'
         ],
         raw: true,
         nest: true,
