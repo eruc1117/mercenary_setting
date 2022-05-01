@@ -1,5 +1,5 @@
 {
-  "name": "forum-express-grading",
+  "name": "mercenary",
   "version": "3.0.0",
   "main": "app.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ALPHACamp/forum-express-grading.git"
+    "url": "git+https://github.com/eruc1117/mercenary_setting.git"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,8 +20,6 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
     "express-session": "^1.17.2",
-    "faker": "^6.6.6",
-    "imgur": "^1.0.2",
     "install": "^0.13.0",
     "method-override": "^3.0.0",
     "multer": "^1.4.3",

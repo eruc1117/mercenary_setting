@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const customize = require('../../function/constructor')
+const customize = require('../../helpers/constructor')
 
 const home = new customize.PageCss('home')
 

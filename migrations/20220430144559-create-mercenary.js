@@ -38,7 +38,7 @@ module.exports = {
       },
       attack_speed: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       range: {
         allowNull: false,
