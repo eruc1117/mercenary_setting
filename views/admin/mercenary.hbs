@@ -1,0 +1,25 @@
+<div class="row w-75 mx-auto">
+  <div class="col-md-12">
+    <h1>{{data.name}}</h1>
+  </div>
+  <div class="col-md-4">
+    <img class="img-responsive center-block" src="{{data.img}}"
+      style="width: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
+    <br>
+    <div class="well">
+      <ul class="list-unstyled">
+        <li><strong>屬性：</strong> {{data.Property.name}}</li>
+        <li><strong>武器：</strong> {{data.Weapon.name}}</li>
+        <li><strong>生命值：</strong> {{data.hp}}</li>
+        <li><strong>攻擊：</strong> {{data.attack}}</li>
+        <li><strong>攻速：</strong> {{data.attackSpeed}}</li>
+        <li><strong>攻擊範圍：</strong> {{data.range}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <p style="white-space: break-spaces;">{{restaurant.description}}</p>
+  </div>
+  <hr>
+  <a class="btn btn-outline-secondary w-25" href="javascript:history.back()">Back</a>
+</div>

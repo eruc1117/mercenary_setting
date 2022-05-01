@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     hp: DataTypes.INTEGER,
     attack: DataTypes.INTEGER,
     attackSpeed: DataTypes.INTEGER,
-    range: DataTypes.INTEGER
+    range: DataTypes.INTEGER,
+    img: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Mercenary',

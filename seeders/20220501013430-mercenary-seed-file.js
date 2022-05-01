@@ -10,6 +10,7 @@ module.exports = {
       attack: 9635,
       attack_speed: 2.32,
       range: 15,
+      img: 'https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--cckza4aydug8bd3l/1441003283.jpg',
       created_at: new Date(),
       updated_at: new Date()
     }], {})

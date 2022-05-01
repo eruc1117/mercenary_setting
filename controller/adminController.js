@@ -1,10 +1,10 @@
 const { Mercenary, Property, Weapon } = require('../models')
 const customize = require('../function/constructor')
 
-const adminIndex = new customize.PageCss('adminIndex')
+const adminMercenaries = new customize.PageCss('adminMercenaries')
 
 const adminController = {
-  getMercenary: async (req, res) => {
+  getMercenaries: async (req, res) => {
     try {
       const data = await Mercenary.findAll({
         attributes: [
@@ -14,7 +14,21 @@ const adminController = {
         nest: true,
         include: [Property, Weapon]
       })
-      res.render('admin/index', { data, cssStyle: adminIndex.css })
+      res.render('admin/mercenaries', { data, cssStyle: adminMercenaries.css })
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  getMercenary: async (req, res) => {
+    try {
+      const id = req.params.id
+      const data = await Mercenary.findByPk(
+        id, {
+          raw: true,
+          nest: true,
+          include: [Property, Weapon]
+        })
+      res.render('admin/mercenary', { data, cssStyle: adminMercenaries.css })
     } catch (err) {
       console.log(err)
     }
