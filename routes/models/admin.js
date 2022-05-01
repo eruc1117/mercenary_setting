@@ -10,6 +10,8 @@ router.get('/mercenary/create', mercenaryController.createMercenary)
 router.post('/mercenary/create', mercenaryController.postMercenary)
 router.get('/mercenary/:id', mercenaryController.getMercenary)
 router.get('/mercenaries', mercenaryController.getMercenaries)
+router.put('/boss/:id/edit', bossController.putBoss)
+router.get('/boss/:id/edit', bossController.editBoss)
 router.get('/boss/:id', bossController.getBoss)
 router.get('/bosses', bossController.getBosses)
 
