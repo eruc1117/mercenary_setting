@@ -10,6 +10,7 @@ router.get('/mercenary/create', mercenaryController.createMercenary)
 router.post('/mercenary/create', mercenaryController.postMercenary)
 router.get('/mercenary/:id', mercenaryController.getMercenary)
 router.get('/mercenaries', mercenaryController.getMercenaries)
+router.get('/boss/:id', bossController.getBoss)
 router.get('/bosses', bossController.getBosses)
 
 module.exports = router
