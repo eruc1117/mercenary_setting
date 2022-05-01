@@ -1,12 +1,15 @@
 const express = require('express')
-const exphbs = require('express-handlebars')
+const handlebars = require('express-handlebars')
 const path = require('path')
+const routes = require('./routes')
 const sassMiddleware = require('node-sass-middleware')
 const PORT = 3000
 const app = express()
 
-app.engine('.hbs', exphbs.engine({ extname: '.hbs' }))
-app.set('view engine', '.hbs')
+// 註冊 Handlebars 樣板引擎，並指定副檔名為 .hbs
+app.engine('hbs', handlebars({ extname: '.hbs' }))
+// 設定使用 Handlebars 做為樣板引擎
+app.set('view engine', 'hbs')
 
 app.use(
   sassMiddleware({
@@ -17,10 +20,8 @@ app.use(
   })
 )
 app.use(express.static('public'))
-app.get('/', (req, res) => {
-  res.render('index')
-})
+app.use(routes)
 
 app.listen(PORT, () => {
-  console.log('App is running!')
+  console.log(`App is running on http://localhost:${PORT}/!`)
 })

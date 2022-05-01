@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       Mercenary.belongsTo(models.Weapon, { foreignKey: 'weaponId' })
-      Mercenary.belongsTo(models.Weapon, { foreignKey: 'propertyId' })
+      Mercenary.belongsTo(models.Property, { foreignKey: 'propertyId' })
       Mercenary.belongsToMany(models.User, {
         through: models.UserMercenary,
         foreignKey: 'mercenaryId',

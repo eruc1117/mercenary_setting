@@ -36,7 +36,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      attackSpeed: {
+      attack_speed: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
@@ -44,11 +44,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
