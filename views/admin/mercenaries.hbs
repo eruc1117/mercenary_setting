@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <div class="content-web">
+        {{> content}}
+      </div>
+    </div>
+    <div class="col-10">
+      <br />
+      <br />
+      <table class="table align-middle">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center" scope="col">#</th>
+            <th class="text-center" scope="col">名字</th>
+            <th class="rwd text-center" scope="col">屬性</th>
+            <th class="rwd text-center" scope="col">武器</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data}}
+          <tr>
+            <th class="text-center" scope="row">{{this.id}}</th>
+            <td class="text-center">{{this.name}}</td>
+            <td class="rwd text-center">{{this.Property.name}}</td>
+            <td class="rwd text-center">{{this.Weapon.name}}</td>
+            <td class="-1">
+              <button type="button" class="btn btn-link">
+                <a class="btn btn-link link-primary" href="/admin/mercenary/{{this.id}}">
+                  Show
+                </a>
+              </button>
+              <button type="button" class="rwd btn btn-link">
+                <a class="btn btn-link link-primary" href="/admin/mercenary/{{this.id}}/edit">
+                  Edit
+                </a>
+              </button>
+              <form action="/admin/mercenary/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+                <button type="submit" class="rwd btn btn-link link-danger"
+                  onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="content-mobile">
+  <div class="btn-group dropup" id="list">
+    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      目錄
+    </button>
+    <ul class="dropdown-menu">
+      {{> content}}
+    </ul>
+  </div>
+</div>
