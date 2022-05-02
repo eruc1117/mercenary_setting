@@ -1,7 +1,8 @@
-const { User } = require('../models')
+const { User, Mercenary, Weapon, Property } = require('../models')
 const bcrypt = require('bcryptjs')
 const customize = require('../helpers/constructor')
 
+const mercenaries = new customize.PageCss('userMercenaries')
 const login = new customize.PageCss('login')
 
 const userController = {
@@ -32,10 +33,7 @@ const userController = {
         req.flash('error_messages', '信箱已經註冊過了！')
         return res.redirect('back')
       }
-      console.log(email)
-      console.log(password)
       const hash = await bcrypt.hash(password, 10)
-      console.log(hash)
       await User.create({
         email,
         password: hash
@@ -49,7 +47,37 @@ const userController = {
     req.flash('success_messages', '登出成功！')
     req.logout()
     res.redirect('/')
+  },
+  getMercenaries: async (req, res, next) => {
+    try {
+      const rawData = await Mercenary.findAll(
+        {
+          include: [{
+            model: User,
+            as: 'UserMercenaryMercenary',
+            where: { id: req.user.id }
+          }, {
+            model: Weapon
+          },
+          {
+            model: Property
+          }],
+          raw: true,
+          nest: true
+
+        })
+      if (!rawData) throw new Error('資料庫尚未建立資料！')
+      console.log(rawData)
+      const data = rawData.map(element => ({
+        name: element.name,
+        property: element.Property.name,
+        weapon: element.Weapon.name,
+        image: element.image
+      }))
+      res.render('user/mercenaries', { data, cssStyle: mercenaries.css })
+    } catch (err) {
+      next(err)
+    }
   }
 }
-
 module.exports = userController

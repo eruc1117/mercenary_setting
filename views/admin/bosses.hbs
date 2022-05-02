@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-2">
       <div class="content-web">
-        {{> content}}
+        {{> list}}
       </div>
     </div>
     <div class="col-10">
@@ -24,7 +24,7 @@
             <td class="rwd text-center">{{this.property}}</td>
             <td class="-1">
               <button type="button" class="btn btn-link">
-                <a class="btn btn-link link-primary" href="/admin/boss/{{this.id}}">
+                <a class="btn btn-link link-primary" href="/visitor/boss/{{this.id}}">
                   Show
                 </a>
               </button>
@@ -52,7 +52,7 @@
       目錄
     </button>
     <ul class="dropdown-menu">
-      {{> content}}
+      {{> list}}
     </ul>
   </div>
 </div>

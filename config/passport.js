@@ -10,7 +10,7 @@ passport.use(new LocalStrategy({
 },
 async function (req, email, password, done) {
   try {
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ where: { email }, raw: true })
     if (!user) {
       return done(null, false, req.flash('error_messages', '信箱尚未註冊！'))
     }
