@@ -15,9 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         as: 'UserMercenaryUser'
       })
-      User.hasMany(models.Ornament, {
-        foreignKey: 'userId'
-      })
     }
   };
   User.init({
