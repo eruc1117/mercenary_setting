@@ -30,6 +30,7 @@
                   Show
                 </a>
               </button>
+              {{#if user}}
               <button type="button" class="rwd btn btn-link">
                 <a class="btn btn-link link-primary" href="/admin/mercenary/{{this.id}}/edit">
                   Edit
@@ -39,6 +40,7 @@
                 <button type="submit" class="rwd btn btn-link link-danger"
                   onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
               </form>
+              {{/if}}
             </td>
           </tr>
           {{/each}}
