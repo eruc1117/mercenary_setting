@@ -116,7 +116,7 @@ const bossController = {
         image
       })
       req.flash('success_messages', '更新王寵資料成功！')
-      res.redirect('/admin/bosses')
+      res.redirect('/visitor/bosses')
     } catch (err) {
       next(err)
     }
@@ -176,7 +176,7 @@ const bossController = {
         attack
       })
       req.flash('success_messages', '新增王寵資料成功！')
-      res.redirect('/admin/bosses')
+      res.redirect('/visitor/bosses')
     } catch (err) {
       next(err)
     }
@@ -186,7 +186,7 @@ const bossController = {
       const data = await Boss.findByPk(req.params.id)
       if (!data) throw new Error('王寵不存在！')
       data.destroy()
-      res.redirect('/admin/bosses')
+      res.redirect('/visitor/bosses')
     } catch (err) {
       next(err)
     }

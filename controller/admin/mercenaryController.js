@@ -90,7 +90,7 @@ const mercenaryController = {
         image
       })
       req.flash('success_messages', '更新傭兵資料成功！')
-      res.redirect('/admin/mercenaries')
+      res.redirect('/visitor/mercenaries')
     } catch (err) {
       next(err)
     }
@@ -100,7 +100,7 @@ const mercenaryController = {
       const data = await Mercenary.findByPk(req.params.id)
       if (!data) throw new Error('傭兵不存在！')
       data.destroy()
-      res.redirect('/admin/mercenaries')
+      res.redirect('/visitor/mercenaries')
     } catch (err) {
       next(err)
     }
@@ -153,7 +153,7 @@ const mercenaryController = {
         image
       })
       req.flash('success_messages', '新增傭兵資料成功！')
-      res.redirect('/admin/mercenaries')
+      res.redirect('/visitor/mercenaries')
     } catch (err) {
       next(err)
     }
