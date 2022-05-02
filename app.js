@@ -6,6 +6,7 @@ const flash = require('connect-flash')
 const handlebars = require('express-handlebars')
 const path = require('path')
 const routes = require('./routes')
+const passport = require('./config/passport')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const PORT = 3000
 const app = express()
@@ -29,9 +30,12 @@ app.use(
   })
 )
 app.use(express.static('public'))
+
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(flash())
+app.use(passport.initialize()) // 增加這行，初始化 Passport
+app.use(passport.session())
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')

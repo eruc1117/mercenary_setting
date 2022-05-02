@@ -4,8 +4,11 @@ const { generalErrorHandler } = require('../middleware/error-handler')
 // 路由載入
 const home = require('./models/home')
 const admin = require('./models/admin')
+const user = require('./models/user')
 
 router.use('/admin', admin)
+router.use('/user', user)
 router.use('/', home)
 router.use('/', generalErrorHandler)
+
 module.exports = router
