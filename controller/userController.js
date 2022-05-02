@@ -14,7 +14,7 @@ const userController = {
   },
   login: (req, res) => {
     req.flash('success_messages', '成功登入！')
-    res.redirect('/admin/mercenaries')
+    res.redirect('/visitor/mercenaries')
   },
   registerPage: async (req, res, next) => {
     try {
