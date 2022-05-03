@@ -8,11 +8,11 @@
     <div class="col-10">
       <br />
       <form action="/user/mine/mercenaries/sort" method="post">
-        <div class="sort d-flex flex-row justify-content-center">
-          <div class="w-25 ms-5">
+        <div class="d-flex flex-row justify-content-center">
+          <div class="sort ms-5">
             {{> sort/property property=property}}
           </div>
-          <div class="w-25 ms-5">
+          <div class="sort ms-5">
             {{> sort/weapon weapon=weapon}}
           </div>
           <div class="w-25 ms-5">
@@ -24,8 +24,9 @@
       <div class="contents">
         {{#each data}}
         <div class="card">
-          <img src="{{this.image}}"
-            class="card-img-top" alt="...">
+          <a class="name" href="/visitor/mercenary/{{this.id}}">
+            <img src="{{this.image}}" class="card-img-top" style="width: 200px; height: 200px;" alt="...">
+          </a>
           <div class="card-body">
             <a class="name" href="/visitor/mercenary/{{this.id}}">
               <h4>{{this.name}}</h4>
@@ -35,7 +36,7 @@
             <li><strong>武器：</strong>{{this.weapon}}</li>
           </div>
         </div>
-      {{/each}}
+        {{/each}}
       </div>
     </div>
   </div>
