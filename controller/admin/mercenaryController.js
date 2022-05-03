@@ -15,9 +15,15 @@ const mercenaryController = {
         nest: true,
         include: [Property, Weapon]
       })
+      const visitorData = rawData.map(element => ({
+        id: element.id,
+        name: element.name,
+        property: element.Property.name,
+        weapon: element.Weapon.name
+      }))
       if (!rawData) throw new Error('資料庫尚未建立資料！')
       if (req.user === undefined) {
-        return res.render('admin/mercenaries', { data: rawData, cssStyle: adminMercenaries.css })
+        return res.render('admin/mercenaries', { data: visitorData, cssStyle: adminMercenaries.css })
       }
       const mineMercrnaryId = req.user && req.user.UserMercenaryUser.map(mine => mine.id)
       const data = rawData.map(element => ({
