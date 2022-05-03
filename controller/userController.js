@@ -1,4 +1,4 @@
-const { User, Mercenary, Weapon, Property } = require('../models')
+const { User, Mercenary, Weapon, Property, UserMercenary } = require('../models')
 const bcrypt = require('bcryptjs')
 const customize = require('../helpers/constructor')
 
@@ -75,6 +75,42 @@ const userController = {
         image: element.image
       }))
       res.render('user/mercenaries', { data, cssStyle: mercenaries.css })
+    } catch (err) {
+      next(err)
+    }
+  },
+  addMyMercenary: async (req, res, next) => {
+    try {
+      const mercenary = await Mercenary.findByPk(req.params.id, { raw: true })
+      const myMercenary = await UserMercenary.findOne({
+        where: {
+          userId: req.user.id,
+          mercenaryId: Number(req.params.id)
+        }
+      })
+      if (!mercenary) throw new Error('傭兵不存在！')
+      if (myMercenary) throw new Error('已擁有該傭兵了')
+      await UserMercenary.create({
+        userId: req.user.id,
+        mercenaryId: req.params.id
+      })
+      res.redirect('back')
+    } catch (err) {
+      next(err)
+    }
+  },
+  removeMyMercenary: async (req, res, next) => {
+    try {
+      const mercenary = await Mercenary.findByPk(req.params.id, { raw: true })
+      if (!mercenary) throw new Error('傭兵不存在！')
+      const myMercenary = await UserMercenary.findOne({
+        where: {
+          userId: req.user.id,
+          mercenaryId: Number(req.params.id)
+        }
+      })
+      await myMercenary.destroy()
+      res.redirect('back')
     } catch (err) {
       next(err)
     }

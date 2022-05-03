@@ -12,5 +12,7 @@ router.get('/register', userController.registerPage)
 router.post('/register', userController.register)
 router.get('/logout', userController.logout)
 router.get('/mercenaries', authenticated, userController.getMercenaries)
+router.get('/add/:id', authenticated, userController.addMyMercenary)
+router.get('/remove/:id', authenticated, userController.removeMyMercenary)
 
 module.exports = router

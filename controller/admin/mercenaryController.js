@@ -1,4 +1,4 @@
-const { Mercenary, Property, Weapon } = require('../../models')
+const { Mercenary, Property, Weapon, UserMercenary } = require('../../models')
 const customize = require('../../helpers/constructor')
 
 const adminMercenaries = new customize.PageCss('adminMercenaries')
@@ -7,7 +7,7 @@ const adminMercenaryEdit = new customize.PageCss('adminMercenaryEdit')
 const mercenaryController = {
   getMercenaries: async (req, res, next) => {
     try {
-      const data = await Mercenary.findAll({
+      const rawData = await Mercenary.findAll({
         attributes: [
           'id', 'name', 'propertyId', 'weaponId'
         ],
@@ -15,7 +15,18 @@ const mercenaryController = {
         nest: true,
         include: [Property, Weapon]
       })
-      if (!data) throw new Error('資料庫尚未建立資料！')
+      if (!rawData) throw new Error('資料庫尚未建立資料！')
+      if (req.user === undefined) {
+        return res.render('admin/mercenaries', { data: rawData, cssStyle: adminMercenaries.css })
+      }
+      const mineMercrnaryId = req.user && req.user.UserMercenaryUser.map(mine => mine.id)
+      const data = rawData.map(element => ({
+        id: element.id,
+        name: element.name,
+        property: element.Property.name,
+        weapon: element.Weapon.name,
+        isMineMercrnary: mineMercrnaryId.includes(element.id)
+      }))
       res.render('admin/mercenaries', { data, cssStyle: adminMercenaries.css })
     } catch (err) {
       next(err)
@@ -31,6 +42,11 @@ const mercenaryController = {
           include: [Property, Weapon]
         })
       if (!data) throw new Error('傭兵不存在！')
+      if (req.user === undefined) {
+        return res.render('admin/mercenary', { data, cssStyle: adminMercenaries.css })
+      }
+      const mineMercrnaryId = req.user && req.user.UserMercenaryUser.map(mine => mine.id)
+      data.isMineMercrnary = mineMercrnaryId.includes(data.id)
       res.render('admin/mercenary', { data, cssStyle: adminMercenaries.css })
     } catch (err) {
       next(err)
@@ -99,7 +115,10 @@ const mercenaryController = {
     try {
       const data = await Mercenary.findByPk(req.params.id)
       if (!data) throw new Error('傭兵不存在！')
-      data.destroy()
+      await UserMercenary.destroy({
+        where: { mercenaryId: Number(req.params.id) }
+      })
+      await data.destroy()
       res.redirect('/visitor/mercenaries')
     } catch (err) {
       next(err)

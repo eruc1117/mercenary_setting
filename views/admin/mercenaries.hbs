@@ -24,13 +24,22 @@
             <td class="text-center">{{this.name}}</td>
             <td class="rwd text-center">{{this.Property.name}}</td>
             <td class="rwd text-center">{{this.Weapon.name}}</td>
-            <td class="-1">
+            <td >
               <button type="button" class="btn btn-link">
                 <a class="btn btn-link link-primary" href="/visitor/mercenary/{{this.id}}">
                   Show
                 </a>
               </button>
-              {{#if user}}
+              {{#if ../user}}
+              {{#if isMineMercrnary}}
+              <button type="button" class="rwd btn btn-link">
+                <a class="btn btn-link link-primary" href="/user/remove/{{this.id}}">解僱</a>
+              </button>
+              {{else}}
+              <button type="button" class="rwd btn btn-link">
+                <a class="btn btn-link link-primary" href="/user/add/{{this.id}}">加入</a>
+              </button>
+              {{/if}}
               <button type="button" class="rwd btn btn-link">
                 <a class="btn btn-link link-primary" href="/admin/mercenary/{{this.id}}/edit">
                   Edit
