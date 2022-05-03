@@ -95,7 +95,7 @@ const userController = {
         userId: req.user.id,
         mercenaryId: req.params.id
       })
-      res.redirect('back')
+      res.redirect('/visitor/mercenaries')
     } catch (err) {
       next(err)
     }
@@ -111,7 +111,7 @@ const userController = {
         }
       })
       await myMercenary.destroy()
-      res.redirect('back')
+      res.redirect('/visitor/mercenaries')
     } catch (err) {
       next(err)
     }
