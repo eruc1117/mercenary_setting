@@ -23,13 +23,14 @@ const bossController = {
         nested: true,
         raw: true
       })
-      if (!rawData) throw new Error('資料庫尚未建立資料！')
+      const property = await Property.findAll({ raw: true })
+      if (!rawData || !property) throw new Error('資料庫尚未建立資料！')
       const data = rawData.map(element => ({
         id: element.id,
         name: element['Fixattribute.name'],
         property: element['Fixattribute.Property.name']
       }))
-      res.render('admin/bosses', { data, cssStyle: adminMercenaries.css })
+      res.render('admin/bosses', { data, property, cssStyle: adminMercenaries.css })
     } catch (err) {
       next(err)
     }
@@ -187,6 +188,43 @@ const bossController = {
       if (!data) throw new Error('王寵不存在！')
       data.destroy()
       res.redirect('/visitor/bosses')
+    } catch (err) {
+      next(err)
+    }
+  },
+  sortBosses: async (req, res, next) => { // 應該能跟傭兵共用
+    try {
+      const { propertyId } = req.body
+      if (propertyId === ' ') {
+        return res.redirect('/visitor/bosses')
+      }
+      const rawData = await Property.findAll({
+        where: {
+          id: propertyId
+        },
+        attributes: [
+          'id', 'name'
+        ],
+        include:
+          [{
+            model: Fixattribute,
+            attributes: ['name']
+          }],
+        nested: true,
+        raw: true
+      })
+      if (rawData[0]['Fixattributes.name'] === null) {
+        req.flash('error_messages', '該屬性沒有王寵資料！')
+        return res.redirect('/visitor/bosses')
+      }
+      const property = await Property.findAll({ raw: true })
+      if (!rawData || !property) throw new Error('資料庫尚未建立資料！')
+      const data = rawData.map(element => ({
+        id: element.id,
+        name: element['Fixattributes.name'],
+        property: element.name
+      }))
+      res.render('admin/bosses', { data, property, cssStyle: adminMercenaries.css })
     } catch (err) {
       next(err)
     }

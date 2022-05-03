@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('FixAttributes', [{
       name: 'ブートストラップ',
-      image: 'https://メルクストーリア.gamerch.com/%E3%83%96%E3%83%BC%E3%83%88%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97',
+      image: 'https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--cckza4aydug8bd3l/wikidb_thumbnail/1020585/individual_200.jpg?d=20210305011338&q=20',
       property_id: 5,
       skin_id: 2,
       range: 150,

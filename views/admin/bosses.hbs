@@ -2,11 +2,21 @@
   <div class="row">
     <div class="col-2">
       <div class="content-web">
-        {{> content}}
+        {{> list}}
       </div>
     </div>
     <div class="col-10">
       <br />
+      <form action="/visitor/bosses/sort" method="post">
+        <div class="sort d-flex flex-row justify-content-center">
+          <div class="ms-5">
+            {{> sort/property property=property}}
+          </div>
+          <div class="ms-5">
+            <button class="btn btn-dark" type="submit">篩選</button>
+          </div>
+        </div>
+      </form>
       <br />
       <table class="table align-middle">
         <thead class="thead-dark">
@@ -24,10 +34,11 @@
             <td class="rwd text-center">{{this.property}}</td>
             <td class="-1">
               <button type="button" class="btn btn-link">
-                <a class="btn btn-link link-primary" href="/admin/boss/{{this.id}}">
+                <a class="btn btn-link link-primary" href="/visitor/boss/{{this.id}}">
                   Show
                 </a>
               </button>
+              {{#if ../user}}
               <button type="button" class="rwd btn btn-link">
                 <a class="btn btn-link link-primary" href="/admin/boss/{{this.id}}/edit">
                   Edit
@@ -37,6 +48,7 @@
                 <button type="submit" class="rwd btn btn-link link-danger"
                   onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
               </form>
+              {{/if}}
             </td>
           </tr>
           {{/each}}
@@ -52,7 +64,7 @@
       目錄
     </button>
     <ul class="dropdown-menu">
-      {{> content}}
+      {{> list}}
     </ul>
   </div>
 </div>

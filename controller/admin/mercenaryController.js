@@ -1,5 +1,6 @@
-const { Mercenary, Property, Weapon } = require('../../models')
+const { Mercenary, Property, Weapon, UserMercenary } = require('../../models')
 const customize = require('../../helpers/constructor')
+const { Op } = require('sequelize')
 
 const adminMercenaries = new customize.PageCss('adminMercenaries')
 const adminMercenaryEdit = new customize.PageCss('adminMercenaryEdit')
@@ -7,7 +8,7 @@ const adminMercenaryEdit = new customize.PageCss('adminMercenaryEdit')
 const mercenaryController = {
   getMercenaries: async (req, res, next) => {
     try {
-      const data = await Mercenary.findAll({
+      const rawData = await Mercenary.findAll({
         attributes: [
           'id', 'name', 'propertyId', 'weaponId'
         ],
@@ -15,8 +16,28 @@ const mercenaryController = {
         nest: true,
         include: [Property, Weapon]
       })
-      if (!data) throw new Error('資料庫尚未建立資料！')
-      res.render('admin/mercenaries', { data, cssStyle: adminMercenaries.css })
+      const visitorData = rawData.map(element => ({
+        id: element.id,
+        name: element.name,
+        property: element.Property.name,
+        weapon: element.Weapon.name
+      }))
+      const property = await Property.findAll({ raw: true })
+      const weapon = await Weapon.findAll({ raw: true })
+      if (!rawData || !property) throw new Error('資料庫尚未建立資料！')
+      if (!rawData) throw new Error('資料庫尚未建立資料！')
+      if (req.user === undefined) {
+        return res.render('admin/mercenaries', { data: visitorData, property, weapon, cssStyle: adminMercenaries.css })
+      }
+      const mineMercrnaryId = req.user && req.user.UserMercenaryUser.map(mine => mine.id)
+      const data = rawData.map(element => ({
+        id: element.id,
+        name: element.name,
+        property: element.Property.name,
+        weapon: element.Weapon.name,
+        isMineMercrnary: mineMercrnaryId.includes(element.id)
+      }))
+      res.render('admin/mercenaries', { data, property, weapon, cssStyle: adminMercenaries.css })
     } catch (err) {
       next(err)
     }
@@ -31,6 +52,11 @@ const mercenaryController = {
           include: [Property, Weapon]
         })
       if (!data) throw new Error('傭兵不存在！')
+      if (req.user === undefined) {
+        return res.render('admin/mercenary', { data, cssStyle: adminMercenaries.css })
+      }
+      const mineMercrnaryId = req.user && req.user.UserMercenaryUser.map(mine => mine.id)
+      data.isMineMercrnary = mineMercrnaryId.includes(data.id)
       res.render('admin/mercenary', { data, cssStyle: adminMercenaries.css })
     } catch (err) {
       next(err)
@@ -99,7 +125,10 @@ const mercenaryController = {
     try {
       const data = await Mercenary.findByPk(req.params.id)
       if (!data) throw new Error('傭兵不存在！')
-      data.destroy()
+      await UserMercenary.destroy({
+        where: { mercenaryId: Number(req.params.id) }
+      })
+      await data.destroy()
       res.redirect('/visitor/mercenaries')
     } catch (err) {
       next(err)
@@ -157,7 +186,46 @@ const mercenaryController = {
     } catch (err) {
       next(err)
     }
+  },
+  sortMercenaries: async (req, res, next) => { // 應該能跟傭兵共用
+    try {
+      const { propertyId, weaponId } = req.body
+      const rawData = await Mercenary.findAll({
+        where: {
+          [Op.or]: [{ propertyId }, { weaponId }]
+        },
+        include: [{
+          model: Property
+        }, {
+          model: Weapon
+        }],
+        raw: true,
+        nest: true
+      })
+      const visitorData = rawData.map(element => ({
+        id: element.id,
+        name: element.name,
+        property: element.Property.name,
+        weapon: element.Weapon.name
+      }))
+      const property = await Property.findAll({ raw: true })
+      const weapon = await Weapon.findAll({ raw: true })
+      if (!rawData || !property || !weapon) throw new Error('資料庫尚未建立資料！')
+      if (req.user === undefined) {
+        return res.render('admin/mercenaries', { data: visitorData, property, weapon, cssStyle: adminMercenaries.css })
+      }
+      const mineMercrnaryId = req.user && req.user.UserMercenaryUser.map(mine => mine.id)
+      const data = rawData.map(element => ({
+        id: element.id,
+        name: element.name,
+        property: element.Property.name,
+        weapon: element.Weapon.name,
+        isMineMercrnary: mineMercrnaryId.includes(element.id)
+      }))
+      res.render('admin/mercenaries', { data, property, weapon, cssStyle: adminMercenaries.css })
+    } catch (err) {
+      next(err)
+    }
   }
 }
-
 module.exports = mercenaryController

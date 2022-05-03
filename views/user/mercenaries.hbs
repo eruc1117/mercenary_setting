@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2" id="web-list">
+      <div class="content-web">
+        {{> list}}
+      </div>
+    </div>
+    <div class="col-10">
+      <br />
+      <form action="/user/mine/mercenaries/sort" method="post">
+        <div class="d-flex flex-row justify-content-center">
+          <div class="sort ms-5">
+            {{> sort/property property=property}}
+          </div>
+          <div class="sort ms-5">
+            {{> sort/weapon weapon=weapon}}
+          </div>
+          <div class="w-25 ms-5">
+            <button class="btn btn-dark" type="submit">篩選</button>
+          </div>
+        </div>
+      </form>
+      <br />
+      <div class="contents">
+        {{#each data}}
+        <div class="card">
+          <a class="name" href="/visitor/mercenary/{{this.id}}">
+            <img src="{{this.image}}" class="card-img-top" style="width: 200px; height: 200px;" alt="...">
+          </a>
+          <div class="card-body">
+            <a class="name" href="/visitor/mercenary/{{this.id}}">
+              <h4>{{this.name}}</h4>
+            </a>
+            <br>
+            <li><strong>屬性：</strong>{{this.property}}</li>
+            <li><strong>武器：</strong>{{this.weapon}}</li>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-mobile">
+  <div class="btn-group dropup" id="list">
+    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      目錄
+    </button>
+    <ul class="dropdown-menu">
+      {{> list}}
+    </ul>
+  </div>
+</div>

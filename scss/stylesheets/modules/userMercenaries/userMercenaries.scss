@@ -1,0 +1,34 @@
+.contents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin-left: 5%;
+  margin-bottom: 5%;
+  width: 200px;
+  list-style-type: none;
+}
+
+.name {
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
+  #web-list {
+    display: none;
+  }
+
+  .contents {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    margin: auto;
+    margin-bottom: 10px;
+  }
+}

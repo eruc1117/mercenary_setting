@@ -2,11 +2,24 @@
   <div class="row">
     <div class="col-2">
       <div class="content-web">
-        {{> content}}
+        {{> list}}
       </div>
     </div>
     <div class="col-10">
       <br />
+      <form action="/visitor/mercenaries/sort" method="post">
+        <div class="sort d-flex flex-row justify-content-center">
+          <div class="ms-5">
+            {{> sort/property property=property}}
+          </div>
+          <div class="ms-5">
+            {{> sort/weapon weapon=weapon}}
+          </div>
+          <div class="w-25 ms-5">
+            <button class="btn btn-dark" type="submit">篩選</button>
+          </div>
+        </div>
+      </form>
       <br />
       <table class="table align-middle">
         <thead class="thead-dark">
@@ -22,14 +35,24 @@
           <tr>
             <th class="text-center" scope="row">{{this.id}}</th>
             <td class="text-center">{{this.name}}</td>
-            <td class="rwd text-center">{{this.Property.name}}</td>
-            <td class="rwd text-center">{{this.Weapon.name}}</td>
-            <td class="-1">
+            <td class="rwd text-center">{{this.property}}</td>
+            <td class="rwd text-center">{{this.weapon}}</td>
+            <td>
               <button type="button" class="btn btn-link">
-                <a class="btn btn-link link-primary" href="/admin/mercenary/{{this.id}}">
+                <a class="btn btn-link link-primary" href="/visitor/mercenary/{{this.id}}">
                   Show
                 </a>
               </button>
+              {{#if ../user}}
+              {{#if isMineMercrnary}}
+              <button type="button" class="rwd btn btn-link">
+                <a class="btn btn-link link-primary" href="/user/remove/{{this.id}}">解僱</a>
+              </button>
+              {{else}}
+              <button type="button" class="rwd btn btn-link">
+                <a class="btn btn-link link-primary" href="/user/add/{{this.id}}">加入</a>
+              </button>
+              {{/if}}
               <button type="button" class="rwd btn btn-link">
                 <a class="btn btn-link link-primary" href="/admin/mercenary/{{this.id}}/edit">
                   Edit
@@ -39,6 +62,7 @@
                 <button type="submit" class="rwd btn btn-link link-danger"
                   onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
               </form>
+              {{/if}}
             </td>
           </tr>
           {{/each}}
@@ -54,7 +78,7 @@
       目錄
     </button>
     <ul class="dropdown-menu">
-      {{> content}}
+      {{> list}}
     </ul>
   </div>
 </div>

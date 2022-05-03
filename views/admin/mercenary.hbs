@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-4">
     <img class="img-responsive center-block" src="{{data.image}}"
-      style="width: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
+      style="width: 250px; height: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
     <br>
     <div class="well">
       <ul class="list-unstyled">
@@ -18,5 +18,12 @@
     </div>
   </div>
   <hr>
-  <a class="btn btn-outline-secondary w-25" href="javascript:history.back()">Back</a>
+  <div class="d-flex flex-column">
+    {{#if data.isMineMercrnary}}
+      <a class="btn btn-outline-secondary w-25 mb-2" href="/user/remove/{{data.id}}">解僱</a>
+    {{else}}
+      <a class="btn btn-outline-secondary w-25 mb-2" href="/user/add/{{data.id}}">加入</a>
+    {{/if}}
+    <a class="btn btn-outline-secondary w-25" href="javascript:history.back()">Back</a>
+  </div>
 </div>
