@@ -24,14 +24,13 @@ const bossController = {
         raw: true
       })
       const property = await Property.findAll({ raw: true })
-      const skin = await Skin.findAll({ raw: true })
-      if (!rawData || !property || !skin) throw new Error('資料庫尚未建立資料！')
+      if (!rawData || !property) throw new Error('資料庫尚未建立資料！')
       const data = rawData.map(element => ({
         id: element.id,
         name: element['Fixattribute.name'],
         property: element['Fixattribute.Property.name']
       }))
-      res.render('admin/bosses', { data, property, skin, cssStyle: adminMercenaries.css })
+      res.render('admin/bosses', { data, property, cssStyle: adminMercenaries.css })
     } catch (err) {
       next(err)
     }
