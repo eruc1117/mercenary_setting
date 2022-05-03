@@ -5,6 +5,7 @@ const bossController = require('../../controller/admin/bossController')
 
 router.get('/mercenary/:id', mercenaryController.getMercenary)
 router.get('/mercenaries', mercenaryController.getMercenaries)
+router.post('/bosses/sort', bossController.sort)
 router.get('/boss/:id', bossController.getBoss)
 router.get('/bosses', bossController.getBosses)
 

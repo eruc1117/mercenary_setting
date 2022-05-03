@@ -1,0 +1,10 @@
+<div class="mb-3">
+  <select class="form-control" id="skinId" name="skinId">
+    <option value=" " selected>皮膚</option>
+    {{#each skin}}
+    <option value="{{this.id}}" {{#ifCond this.id ../data.skin}} selected {{/ifCond}}>
+      {{this.name}}
+    </option>
+    {{/each}}
+  </select>
+</div>

@@ -7,6 +7,16 @@
     </div>
     <div class="col-10">
       <br />
+      <form action="/visitor/bosses/sort" method="post">
+        <div class="sort d-flex flex-row justify-content-center">
+          <div class="w-25 ms-5">
+            {{> sort/property property=property}}
+          </div>
+          <div class="w-25 ms-5">
+            <button class="btn btn-dark" type="submit">篩選</button>
+          </div>
+        </div>
+      </form>
       <br />
       <table class="table align-middle">
         <thead class="thead-dark">
