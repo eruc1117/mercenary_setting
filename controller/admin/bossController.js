@@ -192,7 +192,7 @@ const bossController = {
       next(err)
     }
   },
-  sort: async (req, res, next) => { // 應該能跟傭兵共用
+  sortBosses: async (req, res, next) => { // 應該能跟傭兵共用
     try {
       const { propertyId } = req.body
       if (propertyId === ' ') {

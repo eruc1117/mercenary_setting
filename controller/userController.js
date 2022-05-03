@@ -64,9 +64,10 @@ const userController = {
           }],
           raw: true,
           nest: true
-
         })
-      if (!rawData) throw new Error('資料庫尚未建立資料！')
+      const property = await Property.findAll({ raw: true })
+      const weapon = await Weapon.findAll({ raw: true })
+      if (!rawData || !property || !weapon) throw new Error('資料庫尚未建立資料！')
       const data = rawData.map(element => ({
         id: element.id,
         name: element.name,
@@ -74,7 +75,7 @@ const userController = {
         weapon: element.Weapon.name,
         image: element.image
       }))
-      res.render('user/mercenaries', { data, cssStyle: mercenaries.css })
+      res.render('user/mercenaries', { data, property, weapon, cssStyle: mercenaries.css })
     } catch (err) {
       next(err)
     }
@@ -111,6 +112,47 @@ const userController = {
       })
       await myMercenary.destroy()
       res.redirect('back')
+    } catch (err) {
+      next(err)
+    }
+  },
+  sortMercenaries: async (req, res, next) => { // 應該能跟傭兵共用
+    try {
+      const { propertyId, weaponId } = req.body
+      console.log(propertyId)
+      const rawData = await Mercenary.findAll(
+        {
+          include: [{
+            model: User,
+            as: 'UserMercenaryMercenary',
+            where: { id: req.user.id }
+          }, {
+            model: Weapon
+          },
+          {
+            model: Property
+          }],
+          raw: true,
+          nest: true
+        })
+      const data = []
+      rawData.forEach(element => {
+        const merWeaponId = element.Weapon.id
+        const merPropertyId = element.Property.id
+        if ((merPropertyId === Number(propertyId)) || (merWeaponId === Number(weaponId))) {
+          data.push({
+            id: element.id,
+            name: element.name,
+            image: element.image,
+            property: element.Property.name,
+            weapon: element.Weapon.name
+          })
+        }
+      })
+      const property = await Property.findAll({ raw: true })
+      const weapon = await Weapon.findAll({ raw: true })
+      if (!rawData || !property || !weapon) throw new Error('資料庫尚未建立資料！')
+      res.render('user/mercenaries', { data, property, weapon, cssStyle: mercenaries.css })
     } catch (err) {
       next(err)
     }

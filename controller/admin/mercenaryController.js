@@ -187,7 +187,7 @@ const mercenaryController = {
       next(err)
     }
   },
-  sort: async (req, res, next) => { // 應該能跟傭兵共用
+  sortMercenaries: async (req, res, next) => { // 應該能跟傭兵共用
     try {
       const { propertyId, weaponId } = req.body
       const rawData = await Mercenary.findAll({
