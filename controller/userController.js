@@ -67,8 +67,8 @@ const userController = {
 
         })
       if (!rawData) throw new Error('資料庫尚未建立資料！')
-      console.log(rawData)
       const data = rawData.map(element => ({
+        id: element.id,
         name: element.name,
         property: element.Property.name,
         weapon: element.Weapon.name,

@@ -14,11 +14,12 @@
           <img src="{{this.image}}"
             class="card-img-top" alt="...">
           <div class="card-body">
-            <a href="/#">
+            <a class="name" href="/visitor/mercenary/{{this.id}}">
               <h4>{{this.name}}</h4>
             </a>
-            <p><strong>屬性：</strong>{{this.property}}</p>
-            <p><strong>武器：</strong>{{this.weapon}}</p>
+            <br>
+            <li><strong>屬性：</strong>{{this.property}}</li>
+            <li><strong>武器：</strong>{{this.weapon}}</li>
           </div>
         </div>
       {{/each}}
