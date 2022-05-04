@@ -47,6 +47,7 @@ const bossController = {
         })
       if (!rawData) throw new Error('王寵不存在！')
       const data = {
+        id: rawData.id,
         name: rawData['Fixattribute.name'],
         image: rawData['Fixattribute.image'],
         property: rawData['Fixattribute.Property.name'],

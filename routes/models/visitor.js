@@ -9,5 +9,7 @@ router.get('/mercenaries', mercenaryController.getMercenaries)
 router.post('/bosses/sort', bossController.sortBosses)
 router.get('/boss/:id', bossController.getBoss)
 router.get('/bosses', bossController.getBosses)
+router.post('/group/mercenaries/sort/:id', mercenaryController.group)
+router.get('/group/boss/:id', mercenaryController.group)
 
 module.exports = router

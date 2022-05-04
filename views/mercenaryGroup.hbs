@@ -1,0 +1,99 @@
+<div class="row w-75 mx-auto">
+  <div class="boss-data">
+    <div class="boss-name">
+      <h1>{{bossData.name}}</h1>
+    </div>
+    <div class="boss-detail">
+      <div class="boss-image">
+        <img class="img-responsive center-block" src="{{bossData.image}}"
+          style="width: 250px; height: 250px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
+        <br>
+      </div>
+      <div class="boss-info">
+        <ul class="list-unstyled" id="info-list">
+          <li><strong>屬性：</strong> {{bossData.property}}</li>
+          <li><strong>皮膚：</strong> {{bossData.skin}}</li>
+          <li><strong>攻擊：</strong> {{bossData.attack}}</li>
+          <li><strong>攻擊範圍：</strong> {{bossData.range}}</li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <form action="/visitor/group/mercenaries/sort/{{bossData.id}}" method="post">
+      <div class="d-flex flex-row justify-content-center">
+        <div class="sort ms-5">
+          {{> sort/property property=property}}
+        </div>
+        <div class="sort ms-5">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="myMercenary" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              擁有的傭兵
+            </label>
+          </div>
+        </div>
+        <div class="w-25 ms-5">
+          <button class="btn btn-dark" type="submit">篩選</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="mercenaris">
+    <div>
+      <h5>王寵攻擊範圍中</h5>
+      <table class="table align-middle">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center" scope="col">#</th>
+            <th class="text-center" scope="col">名字</th>
+            <th class="rwd text-center" scope="col">武器</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each inMercenaries}}
+          <tr>
+            <th class="text-center" scope="row">{{this.id}}</th>
+            <td class="text-center">{{this.name}}</td>
+            <td class="rwd text-center">{{this.weapon}}</td>
+            <td>
+              <button type="button" class="btn btn-link">
+                <a class="btn btn-link link-primary" href="/visitor/mercenary/{{this.id}}">
+                  Show
+                </a>
+              </button>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4">
+      <h5>王寵攻擊範圍外</h5>
+      <table class="table align-middle">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center" scope="col">#</th>
+            <th class="text-center" scope="col">名字</th>
+            <th class="rwd text-center" scope="col">武器</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each outMercenaries}}
+          <tr>
+            <th class="text-center" scope="row">{{this.id}}</th>
+            <td class="text-center">{{this.name}}</td>
+            <td class="rwd text-center">{{this.weapon}}</td>
+            <td>
+              <button type="button" class="btn btn-link">
+                <a class="btn btn-link link-primary" href="/visitor/mercenary/{{this.id}}">
+                  Show
+                </a>
+              </button>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

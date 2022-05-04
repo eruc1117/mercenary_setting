@@ -1,10 +1,11 @@
 const { Mercenary, Property, Weapon, UserMercenary } = require('../../models')
 const customize = require('../../helpers/constructor')
+const sortMercenaries = require('../../helpers/sortMer')
 const { Op } = require('sequelize')
 
 const adminMercenaries = new customize.PageCss('adminMercenaries')
 const adminMercenaryEdit = new customize.PageCss('adminMercenaryEdit')
-
+const mercenaryGroup = new customize.PageCss('mercenaryGroup')
 const mercenaryController = {
   getMercenaries: async (req, res, next) => {
     try {
@@ -223,6 +224,19 @@ const mercenaryController = {
         isMineMercrnary: mineMercrnaryId.includes(element.id)
       }))
       res.render('admin/mercenaries', { data, property, weapon, cssStyle: adminMercenaries.css })
+    } catch (err) {
+      next(err)
+    }
+  },
+  group: async (req, res, next) => {
+    try {
+      const propertyId = req.body.propertyId
+      const myMercenary = req.body.myMercenary
+      if (!propertyId && !myMercenary) {
+        console.log(1)
+        const [bossData, property, inMercenaries, outMercenaries] = await sortMercenaries.rangeSortMer(req, next)
+        return res.render('mercenaryGroup', { bossData, property, inMercenaries, outMercenaries, cssStyle: mercenaryGroup.css })
+      }
     } catch (err) {
       next(err)
     }

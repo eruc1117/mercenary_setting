@@ -1,0 +1,35 @@
+/**************************************
+BREAKPOINTS
+**************************************/
+@media screen and (min-width: 600px) {
+  .boss-name {
+    h1 {
+      text-align: center;
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+  }
+
+  .boss-detail {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .boss-image,
+  .boss-info {
+    height: 250px;
+  }
+
+  .boss-info {
+    margin-left: 10%;
+
+    #info-list {
+      margin-top: 150px;
+    }
+  }
+
+  .mercenaries {
+    display: flex;
+    flex-direction: row;
+  }
+}
