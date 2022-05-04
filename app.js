@@ -9,7 +9,7 @@ const path = require('path')
 const routes = require('./routes')
 const passport = require('./config/passport')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 const app = express()
 
 // 註冊 Handlebars 樣板引擎，並指定副檔名為 .hbs
