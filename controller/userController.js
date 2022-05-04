@@ -1,6 +1,8 @@
 const { User, Mercenary, Weapon, Property, UserMercenary } = require('../models')
 const bcrypt = require('bcryptjs')
 const customize = require('../helpers/constructor')
+const sortMercenaries = require('../helpers/sortMer')
+const mercenaryGroup = new customize.PageCss('mercenaryGroup')
 
 const mercenaries = new customize.PageCss('userMercenaries')
 const login = new customize.PageCss('login')
@@ -119,7 +121,6 @@ const userController = {
   sortMercenaries: async (req, res, next) => { // 應該能跟傭兵共用
     try {
       const { propertyId, weaponId } = req.body
-      console.log(propertyId)
       const rawData = await Mercenary.findAll(
         {
           include: [{
@@ -149,10 +150,22 @@ const userController = {
           })
         }
       })
+      if (!data.length) {
+        req.flash('error_messages', '沒有符合條件的傭兵')
+        return res.redirect('/user/mercenaries')
+      }
       const property = await Property.findAll({ raw: true })
       const weapon = await Weapon.findAll({ raw: true })
       if (!rawData || !property || !weapon) throw new Error('資料庫尚未建立資料！')
       res.render('user/mercenaries', { data, property, weapon, cssStyle: mercenaries.css })
+    } catch (err) {
+      next(err)
+    }
+  },
+  group: async (req, res, next) => {
+    try {
+      const [bossData, property, inMercenaries, outMercenaries] = await sortMercenaries.rangeSortMer(req, next)
+      res.render('mercenaryGroup', { bossData, property, inMercenaries, outMercenaries, cssStyle: mercenaryGroup.css })
     } catch (err) {
       next(err)
     }
