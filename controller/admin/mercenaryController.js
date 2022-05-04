@@ -4,7 +4,6 @@ const { Op } = require('sequelize')
 
 const adminMercenaries = new customize.PageCss('adminMercenaries')
 const adminMercenaryEdit = new customize.PageCss('adminMercenaryEdit')
-
 const mercenaryController = {
   getMercenaries: async (req, res, next) => {
     try {
@@ -202,6 +201,10 @@ const mercenaryController = {
         raw: true,
         nest: true
       })
+      if (!rawData.length) {
+        req.flash('error_messages', '沒有符合條件的傭兵')
+        return res.redirect('/visitor/mercenaries')
+      }
       const visitorData = rawData.map(element => ({
         id: element.id,
         name: element.name,

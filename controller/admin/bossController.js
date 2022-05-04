@@ -47,6 +47,7 @@ const bossController = {
         })
       if (!rawData) throw new Error('王寵不存在！')
       const data = {
+        id: rawData.id,
         name: rawData['Fixattribute.name'],
         image: rawData['Fixattribute.image'],
         property: rawData['Fixattribute.Property.name'],
@@ -195,7 +196,7 @@ const bossController = {
   sortBosses: async (req, res, next) => { // 應該能跟傭兵共用
     try {
       const { propertyId } = req.body
-      if (propertyId === ' ') {
+      if (!propertyId) {
         return res.redirect('/visitor/bosses')
       }
       const rawData = await Property.findAll({
