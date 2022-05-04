@@ -196,7 +196,7 @@ const bossController = {
   sortBosses: async (req, res, next) => { // 應該能跟傭兵共用
     try {
       const { propertyId } = req.body
-      if (propertyId === ' ') {
+      if (!propertyId) {
         return res.redirect('/visitor/bosses')
       }
       const rawData = await Property.findAll({
