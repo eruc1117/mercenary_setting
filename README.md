@@ -28,18 +28,13 @@
 <br>
 
 1. 下載專案<br>
-```$ git clone https://github.com/eruc1117/mercenary_setting.git```
-<br>
-<br>
+```$ git clone https://github.com/eruc1117/mercenary_setting.git```<br><br>
 2. 安裝 Node package<br>
 ```$ cd mercenary_setting```<br>
-```$ npm install --save```<br>
-<br>
-3. 完成資料庫架構設定 <br>
-```npx sequelize db:migrate```<br>
-<br>
-4. 產生種子資料
-```npx sequelize db:seed:all```<br>
-<br>
+```$ npm install --save```<br><br>
+3. 完成資料庫架構設定<br>
+```npx sequelize db:migrate```<br><br>
+4. 產生種子資料<br>
+```npx sequelize db:seed:all```<br><br>
 5. 執行<br>
 ```npm run dev```
