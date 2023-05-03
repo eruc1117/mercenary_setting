@@ -26,6 +26,13 @@
 * [node.js](https://nodejs.org/en/)
 * [MySQL](https://dev.mysql.com/downloads/mysql/)
 <br>
+資料庫設定
+  "username": "root",
+  "password": "password",
+  "database": "mercenary_setting",
+  "host": "127.0.0.1",
+  "dialect": "mysql"
+
 
 1. 下載專案<br>
 ```$ git clone https://github.com/eruc1117/mercenary_setting.git```<br><br>
